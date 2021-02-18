@@ -1,8 +1,9 @@
 ##############################################
 # Author:                                    #
-# Edward Riley & Joel Parkerimport requests  #
+# Edward Riley & Joel Parker  #
 ##############################################
 
+import requests
 import json
 
 
