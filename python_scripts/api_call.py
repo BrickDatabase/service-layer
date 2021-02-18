@@ -1,6 +1,6 @@
 ##############################################
 # Author:                                    #
-# Edward Riley & Joel Parker  #
+# Edward Riley & Joel Parker                 #
 ##############################################
 
 import requests
