@@ -6,7 +6,6 @@
 import requests
 import json
 
-
 # note that CLIENT_ID refers to 'personal use script' and SECRET_TOKEN to 'token'
 auth = requests.auth.HTTPBasicAuth('5H8SluqMBijdSA', 'wZAjkKUXYRMD02YnA7XTcKiie3-OaQ')
 # here we pass our login method (password), username, and password
@@ -29,10 +28,16 @@ headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
 'https://www.reddit.com/dev/api/oauth/'
 
 # while the token is valid (~2 hours) we just add headers=headers to our requests
-response = requests.get('https://oauth.reddit.com/subreddits/popular', headers=headers)
+# response = requests.get('https://oauth.reddit.com/subreddits/popular', headers=headers)
 
-# converts to JS
-responseJSON = json.loads(response.content)
-prettyJSON = json.dumps(responseJSON, indent=2)
+def getResult(urlTarget):
+        baseURL = "https://oauth.reddit.com/"
+        urlTarget = baseURL + urlTarget
+        response = requests.get(urlTarget, headers=headers)
 
-print(prettyJSON)
+        # converts to JS
+        responseJSON = json.loads(response.content)
+        # prettyJSON = json.dumps(responseJSON, indent=2)
+
+
+        return responseJSON
