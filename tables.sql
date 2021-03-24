@@ -32,3 +32,14 @@ CREATE TABLE IF NOT EXISTS `subreddit_db`.`information` (
     REFERENCES `subreddit_db`.`subreddit_reference_lookup` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (1, 'Rochester Institute of Technology', 'rit');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (2, 'Minecraft', 'minecraft');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (3, 'Bitcoin', 'bitcoin');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (4, 'Wallstreet Bets', 'wallstreetbets');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (5, 'Robinhood', 'robinhood');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (6, 'GameStop', 'gamestop');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (7, 'Sony PlayStation', 'playstation');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (8, 'Microsoft Xbox', 'xbox');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (9, 'Nintendo', 'nintendo');
+INSERT INTO `subreddit_db`.`subreddit_reference_lookup` (`id`, `name`, `abbreviation`) VALUES (10, 'Gaming', 'gaming');
