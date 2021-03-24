@@ -3,31 +3,21 @@
 # Edward Riley                               #
 ##############################################
 
+# Note To Self for Edward: Take a look at active_user_count, accounts_active for {/r/[subreddit]/about/}
+
+
 import baseAPI
 import json
 
-resultPopular = (baseAPI.getResult("subreddits/popular/"))
+subredditArray = ['rit', 'minecraft', 'bitcoin', 'wallstreetbets', 'robinhood', 'gamestop', 'playstation', 'xbox', 'nintendo', 'gaming']
 
-# SAVE THIS FOR FUTURE GUIDANCE ON KEYWORDS - EDWARD RILEY
-# for each in resultPopular['data']['children'][0]['data']:
-#    print(each)
 
-prettyJSON = json.dumps(resultPopular['data']['children'][0]['data']['title'], indent=2)
-counter=0
-array = []
-try:
-    while True:
-        subArray = []
-        name = resultPopular['data']['children'][counter]['data']['title']
-        subscribers = resultPopular['data']['children'][counter]['data']['subscribers']
-        
-        subArray.append(name)
-        subArray.append(subscribers)
+for subreddit in subredditArray:
+    url = "/r/" + subreddit + "/about/"
+    
+    result = (baseAPI.getResult(url))
+    print(subreddit.capitalize() + ": \t" + str(result['data']['subscribers']))
 
-        array.append(subArray)
-        counter = counter + 1
-except:
-    print("\nTotal Subreddits: " + str(counter) + "\n")
-    print(array)
-
-# print(prettyJSON)
+url = "/r/rit/api/info"
+result = (baseAPI.getResult(url))
+print(result['data'])
