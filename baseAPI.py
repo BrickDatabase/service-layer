@@ -37,7 +37,19 @@ def getResult(urlTarget):
 
         # converts to JS
         responseJSON = json.loads(response.content)
-        # prettyJSON = json.dumps(responseJSON, indent=2)
 
+        return responseJSON
+        
+def getSubmissionResult(subreddit):
+        baseURL = "https://api.pushshift.io/reddit/search/submission/?subreddit=" + subreddit + "&metadata=true&size=0"
+        response = requests.get(baseURL)
+        responseJSON = json.loads(response.content)
+        
+        return responseJSON
 
+def getCommentResult(subreddit):
+        baseURL = "https://api.pushshift.io/reddit/search/comment/?subreddit=" + subreddit + "&metadata=true&size=0"
+        response = requests.get(baseURL)
+        responseJSON = json.loads(response.content)
+        
         return responseJSON
