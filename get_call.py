@@ -3,12 +3,35 @@
 # Edward Riley                               #
 ##############################################
 
-import baseAPI
-import baseSQL
-import json
-import mysql
-from datetime import datetime
-import time
+try:
+    import baseAPI
+except:
+    print("baseAPI.py file not found. ")
+    exit(1)
+
+try:
+    import baseSQL
+except:
+    print("baseSQL.py file not found.")
+    exit(1)
+try:
+    import json
+except:
+    print("JSON package not found.")
+    exit(1)
+
+try:
+    import mysql
+except:
+    print("MySQL package not found.")
+    exit(1)
+
+try:
+    from datetime import datetime
+    import time
+except:
+    print("Datetime or Time not found.")
+    exit(1)
 
 subredditArray = ['rit', 'minecraft', 'bitcoin', 'wallstreetbets', 'robinhood', 'gamestop', 'playstation', 'xbox', 'nintendo', 'gaming']
 
