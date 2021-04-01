@@ -12,7 +12,7 @@ auth = requests.auth.HTTPBasicAuth('5H8SluqMBijdSA', 'wZAjkKUXYRMD02YnA7XTcKiie3
 
 data = {'grant_type': 'password',
         'username': 'EuropaReport3',
-        'password': 'Dare8devil'}
+        'password': 'CaptainAmerica19'}
 # setup our header info, which gives reddit a brief description of our app
 headers = {'User-Agent': 'EuropaReport/0.0.1'}
 
