@@ -14,6 +14,13 @@ try:
 except:
     print("baseSQL.py file not found.")
     exit(1)
+
+try:
+    import apscheduler
+except: 
+    print("apscheduler package not found.")
+
+    
 try:
     import json
 except:
@@ -32,6 +39,20 @@ try:
 except:
     print("Datetime or Time not found.")
     exit(1)
+
+
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+sched = BlockingScheduler()
+
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=12)
+def scheduled_job():
+    print('This job is run every weekday at 12pm.')
+
+sched.start()
+
+exit(4)
 
 subredditArray = ['rit', 'minecraft', 'bitcoin', 'wallstreetbets', 'robinhood', 'gamestop', 'playstation', 'xbox', 'nintendo', 'gaming']
 
