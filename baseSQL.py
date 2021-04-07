@@ -3,20 +3,10 @@
 # Edward Riley                               #
 ##############################################
 
-username = "root"
-password = "students"
-hostname = "localhost"
-database = "subreddit_db"
-
-import mysql.connector
+import psycopg2
 
 try:
-    databaseVar = mysql.connector.connect(
-        host=hostname,
-        user=username,
-        password=password,
-        database=database
-    )
+        databaseVar = psycopg2.connect("dbname=subreddit_db")
 except:
     print("Database Connection Failed")
     exit(2)
@@ -32,5 +22,5 @@ def selectAllInformation():
 
 def insertRowInformation(id, date, subscribers, activeSubscribers, submission, comment):
     mycursor = databaseVar.cursor()
-    mycursor.execute("INSERT INTO `subreddit_db`.`information` (`subreddit_id`, `date`, `subscribers`, `active_subscribers`, `submission`, `comments`) VALUES ('" + str(id) + "', '"+ str(date) + "', '" + str(subscribers) + "', '" + str(activeSubscribers) + "', '" + str(submission) + "', '" + str(comment) + "');")
+    mycursor.execute("INSERT INTO information (subreddit_id, date, subscribers, active_subscribers, submission, comments) VALUES ('" + str(id) + "', '"+ str(date) + "', '" + str(subscribers) + "', '" + str(activeSubscribers) + "', '" + str(submission) + "', '" + str(comment) + "');")
 

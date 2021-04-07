@@ -28,12 +28,6 @@ except:
     exit(1)
 
 try:
-    import mysql
-except:
-    print("MySQL package not found.")
-    exit(1)
-
-try:
     from datetime import datetime
     import time
 except:
@@ -42,17 +36,15 @@ except:
 
 
 
-from apscheduler.schedulers.blocking import BlockingScheduler
+# from apscheduler.schedulers.blocking import BlockingScheduler
 
-sched = BlockingScheduler()
+# sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', hour=12)
-def scheduled_job():
-    print('This job is run every weekday at 12pm.')
+# @sched.scheduled_job('cron', day_of_week='mon-fri', hour=12)
+# def scheduled_job():
+#     print('This job is run every weekday at 12pm.')
 
-sched.start()
-
-exit(4)
+# sched.start()
 
 subredditArray = ['rit', 'minecraft', 'bitcoin', 'wallstreetbets', 'robinhood', 'gamestop', 'playstation', 'xbox', 'nintendo', 'gaming']
 
