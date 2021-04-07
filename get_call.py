@@ -34,43 +34,47 @@ except:
     print("Datetime or Time not found.")
     exit(1)
 
+def convertTuple(tup):
+    str =  ''.join(tup)
+    return str
 
+subredditArray = baseSQL.returnSelectAllAbbreviation()
 
-# from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
-# sched = BlockingScheduler()
+sched = BlockingScheduler()
 
-# @sched.scheduled_job('cron', day_of_week='mon-fri', hour=12)
-# def scheduled_job():
-#     print('This job is run every weekday at 12pm.')
+@sched.scheduled_job('cron', hour=11, minute=59)
+def scheduled_job():
+    # This job is run everyday at 11:59 AM.
 
-# sched.start()
+    subredditID = 1
 
-subredditArray = ['rit', 'minecraft', 'bitcoin', 'wallstreetbets', 'robinhood', 'gamestop', 'playstation', 'xbox', 'nintendo', 'gaming']
+    for subreddit in subredditArray:
+        
 
-subredditID = 1
+        subreddit = convertTuple(subreddit)
+        # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
+        time.sleep(1)
+        print(subredditID)
+        
+        url = "/r/" + subreddit + "/about/"
+        
+        result = (baseAPI.getResult(url))
+        submission = baseAPI.getSubmissionResult(subreddit)['metadata']['total_results']
+        comment = baseAPI.getCommentResult(subreddit)['metadata']['total_results']
 
-for subreddit in subredditArray:
-    
-    # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
-    time.sleep(1)
-    print(subredditID)
-    
-    url = "/r/" + subreddit + "/about/"
-    
-    result = (baseAPI.getResult(url))
-    submission = baseAPI.getSubmissionResult(subreddit)['metadata']['total_results']
-    comment = baseAPI.getCommentResult(subreddit)['metadata']['total_results']
+        #print(subreddit.capitalize() + " Subscribers:\t" + str(result['data']['subscribers']))
+        #print(subreddit.capitalize() + " Active Users Count:\t" + str(result['data']['active_user_count']))
+        #print(subreddit.capitalize() + " Submission:\t" + str(submission))
+        #print(subreddit.capitalize() + " Comment:\t" + str(comment))
 
-    #print(subreddit.capitalize() + " Subscribers:\t" + str(result['data']['subscribers']))
-    #print(subreddit.capitalize() + " Active Users Count:\t" + str(result['data']['active_user_count']))
-    #print(subreddit.capitalize() + " Submission:\t" + str(submission))
-    #print(subreddit.capitalize() + " Comment:\t" + str(comment))
+        subscribers = result['data']['subscribers']
+        activeSubscribers = result['data']['active_user_count']
+        date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
+        subredditID = subredditID + 1
 
-    subscribers = result['data']['subscribers']
-    activeSubscribers = result['data']['active_user_count']
-    date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
-    subredditID = subredditID + 1
+    baseSQL.selectAllInformation()
 
-baseSQL.selectAllInformation()
+sched.start()
