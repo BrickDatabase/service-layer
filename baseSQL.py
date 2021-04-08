@@ -19,7 +19,6 @@ def selectAllInformation():
     for x in myresult:
         print(x)
 
-
 def returnSelectAllAbbreviation():
     mycursor = databaseVar.cursor()
     mycursor.execute("SELECT abbreviation FROM lookup")
@@ -30,3 +29,6 @@ def insertRowInformation(id, date, subscribers, activeSubscribers, submission, c
     mycursor = databaseVar.cursor()
     mycursor.execute("INSERT INTO information (subreddit_id, date, subscribers, active_subscribers, submission, comments) VALUES ('" + str(id) + "', '"+ str(date) + "', '" + str(subscribers) + "', '" + str(activeSubscribers) + "', '" + str(submission) + "', '" + str(comment) + "');")
 
+def insertSubreddit(fullname, subreddit):
+    mycursor = databaseVar.cursor()
+    mycursor.execute("INSERT INTO lookup (name, abbreviation) VALUES('" + str(fullname) + "', '" + str(subreddit) + "');")

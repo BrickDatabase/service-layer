@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS information;
 DROP TABLE IF EXISTS lookup;
 
 CREATE TABLE IF NOT EXISTS lookup (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   name VARCHAR(45) NOT NULL,
   abbreviation VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));

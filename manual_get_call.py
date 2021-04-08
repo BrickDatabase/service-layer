@@ -40,9 +40,9 @@ def convertTuple(tup):
 
 subredditArray = baseSQL.returnSelectAllAbbreviation()
 
-# This job is run everyday at 11:59 AM.
-
 subredditID = 1
+baseSQL.insertSubreddit('World News', 'worldnews')
+
 
 for subreddit in subredditArray:
     
