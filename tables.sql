@@ -9,13 +9,13 @@ DROP TABLE IF EXISTS information;
 DROP TABLE IF EXISTS lookup;
 
 CREATE TABLE IF NOT EXISTS lookup (
-  id SERIAL NOT NULL,
+  id SERIAL,
   name VARCHAR(45) NOT NULL,
   abbreviation VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
 
 CREATE TABLE information (
-  id SERIAL NOT NULL,
+  id SERIAL,
   subreddit_id INT NOT NULL,
   date TIMESTAMP NOT NULL,
   subscribers INT NULL DEFAULT NULL,
@@ -32,21 +32,21 @@ CREATE TABLE information (
 
 create table day
 (
-	id serial not null
-		constraint day_pk
-			primary key
-		constraint infold
-			references information (id),
-	day int not null
+	id SERIAL NOT NULL
+		CONSTRAINT day_pk
+			PRIMARY KEY
+		CONSTRAINT infold
+			REFERENCES information (id),
+	day int NOT NULL
 );
 
-INSERT INTO lookup (id, name, abbreviation) VALUES (1, 'Rochester Institute of Technology', 'rit');
-INSERT INTO lookup (id, name, abbreviation) VALUES (2, 'Minecraft', 'minecraft');
-INSERT INTO lookup (id, name, abbreviation) VALUES (3, 'Bitcoin', 'bitcoin');
-INSERT INTO lookup (id, name, abbreviation) VALUES (4, 'Wallstreet Bets', 'wallstreetbets');
-INSERT INTO lookup (id, name, abbreviation) VALUES (5, 'Robinhood', 'robinhood');
-INSERT INTO lookup (id, name, abbreviation) VALUES (6, 'GameStop', 'gamestop');
-INSERT INTO lookup (id, name, abbreviation) VALUES (7, 'Sony PlayStation', 'playstation');
-INSERT INTO lookup (id, name, abbreviation) VALUES (8, 'Microsoft Xbox', 'xbox');
-INSERT INTO lookup (id, name, abbreviation) VALUES (9, 'Nintendo', 'nintendo');
-INSERT INTO lookup (id, name, abbreviation) VALUES (10, 'Gaming', 'gaming');
+INSERT INTO lookup (name, abbreviation) VALUES ('Rochester Institute of Technology', 'rit');
+INSERT INTO lookup (name, abbreviation) VALUES ('Minecraft', 'minecraft');
+INSERT INTO lookup (name, abbreviation) VALUES ('Bitcoin', 'bitcoin');
+INSERT INTO lookup (name, abbreviation) VALUES ('Wallstreet Bets', 'wallstreetbets');
+INSERT INTO lookup (name, abbreviation) VALUES ('Robinhood', 'robinhood');
+INSERT INTO lookup (name, abbreviation) VALUES ('GameStop', 'gamestop');
+INSERT INTO lookup (name, abbreviation) VALUES ('Sony PlayStation', 'playstation');
+INSERT INTO lookup (name, abbreviation) VALUES ('Microsoft Xbox', 'xbox');
+INSERT INTO lookup (name, abbreviation) VALUES ('Nintendo', 'nintendo');
+INSERT INTO lookup (name, abbreviation) VALUES ('Gaming', 'gaming');

@@ -20,7 +20,12 @@ try:
 except: 
     print("apscheduler package not found.")
 
-    
+try:
+    import numpy
+except:
+    print("Numpy package not found.")
+    exit(1)
+
 try:
     import json
 except:
@@ -34,29 +39,24 @@ except:
     print("Datetime or Time not found.")
     exit(1)
 
-def convertTuple(tup):
-    str =  ''.join(tup)
-    return str
-
 subredditArray = baseSQL.returnSelectAllAbbreviation()
 
 subredditID = 1
-baseSQL.insertSubreddit('World News', 'worldnews')
-
+print(subredditArray)
 
 for subreddit in subredditArray:
     
+    subreddit = numpy.asarray(subreddit)
 
-    subreddit = convertTuple(subreddit)
     # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
     time.sleep(1)
     print(subredditID)
     
-    url = "/r/" + subreddit + "/about/"
+    url = "/r/" + subreddit[2] + "/about/"
     
     result = (baseAPI.getResult(url))
-    submission = baseAPI.getSubmissionResult(subreddit)['metadata']['total_results']
-    comment = baseAPI.getCommentResult(subreddit)['metadata']['total_results']
+    submission = baseAPI.getSubmissionResult(subreddit[2])['metadata']['total_results']
+    comment = baseAPI.getCommentResult(subreddit[2])['metadata']['total_results']
 
     #print(subreddit.capitalize() + " Subscribers:\t" + str(result['data']['subscribers']))
     #print(subreddit.capitalize() + " Active Users Count:\t" + str(result['data']['active_user_count']))
