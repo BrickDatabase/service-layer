@@ -32,3 +32,8 @@ def insertRowInformation(id, date, subscribers, activeSubscribers, submission, c
 def insertSubreddit(fullname, subreddit):
     mycursor = databaseVar.cursor()
     mycursor.execute("INSERT INTO lookup (name, abbreviation) VALUES('" + str(fullname) + "', '" + str(subreddit) + "');")
+
+def deleteSubreddit(id):
+    mycursor = databaseVar.cursor()
+    mycursor.execute("DELETE from lookup WHERE id = " + str(id) + ";")
+    mycursor.execute("DELETE from information WHERE subreddit_id = " + str(id) + ";")
