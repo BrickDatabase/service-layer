@@ -7,6 +7,8 @@ CREATE DATABASE subreddit_db;
 DROP TABLE IF EXISTS day;
 DROP TABLE IF EXISTS information;
 DROP TABLE IF EXISTS lookup;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS own;
 
 CREATE TABLE IF NOT EXISTS lookup (
   id SERIAL,
@@ -32,13 +34,35 @@ CREATE TABLE information (
 
 create table day
 (
-	id SERIAL NOT NULL
+	id SERIAL
 		CONSTRAINT day_pk
 			PRIMARY KEY
 		CONSTRAINT infold
 			REFERENCES information (id),
 	day int NOT NULL
 );
+
+create table users
+(
+	id serial
+		constraint user_pk
+			primary key,
+	username varchar(45) NOT NULL,
+	password varchar(150) NOT NULL
+);
+
+create table own
+(
+    user_id int NOT NULL,
+    subreddit_id int NOT NULL,
+    CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT subreddit_id FOREIGN KEY (subreddit_id) REFERENCES lookup(id)
+
+);
+
+
+
+
 
 INSERT INTO lookup (name, abbreviation) VALUES ('Rochester Institute of Technology', 'rit');
 INSERT INTO lookup (name, abbreviation) VALUES ('Minecraft', 'minecraft');
