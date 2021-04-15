@@ -48,7 +48,8 @@ create table users
 		constraint user_pk
 			primary key,
 	username varchar(45) NOT NULL,
-	password varchar(150) NOT NULL
+	password varchar(150) NOT NULL,
+  role INT
 );
 
 create table own
