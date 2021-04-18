@@ -2,6 +2,7 @@
 # Author:                                    #
 # Edward Riley                               #
 ##############################################
+import requests
 
 try:
     import baseAPI
@@ -54,8 +55,9 @@ sched = BlockingScheduler()
 # @sched.scheduled_job('cron', hour=11)
 
 # Every 5 minutes
-@sched.scheduled_job('interval', minutes=5)
+@sched.scheduled_job('interval', minutes=1)
 def scheduled_job():
+
 
     subredditArray = baseSQL.returnSelectAllAbbreviation()
 
@@ -84,9 +86,23 @@ def scheduled_job():
         subscribers = result['data']['subscribers']
         activeSubscribers = result['data']['active_user_count']
         date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
+
+        res = requests.post('https://brick-subreddit.herokuapp.com/info', 
+        data={'subreddit_id':subredditID,
+        'submission':submission,
+        'comment':comment,
+        'subscribers':subscribers,
+        'activeSubscribers':activeSubscribers,
+        'date':date})
+
+        print(res)
+        if res.status_code == 200:
+            print('Success!')
+        elif res.status_code == 404:
+            print('Not Found.')
+        # baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
         subredditID = subredditID + 1
 
-    baseSQL.selectAllInformation()
+    #baseSQL.selectAllInformation()
 
 sched.start()
