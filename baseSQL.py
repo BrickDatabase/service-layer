@@ -7,6 +7,7 @@ import os
 import psycopg2
 
 try:
+
     # data_url = os.getenv('DATABASE_URL',default='postgres://localhost/postgres')
     # databaseVar = psycopg2.connect(data_url)
     databaseVar = psycopg2.connect("dbname=subreddit_db")
