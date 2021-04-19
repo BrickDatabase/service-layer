@@ -20,10 +20,10 @@ CREATE TABLE information (
   id SERIAL,
   subreddit_id INT NOT NULL,
   date TIMESTAMP NOT NULL,
-  subscribers INT NULL DEFAULT NULL,
-  active_subscribers INT NULL DEFAULT NULL,
-  submission INT NULL DEFAULT NULL,
-  comments INT NULL DEFAULT NULL,
+  subscribers INT NULL DEFAULT 0,
+  active_subscribers INT NULL DEFAULT 0,
+  submission INT NULL DEFAULT 0,
+  comments INT NULL DEFAULT 0,
   PRIMARY KEY (id),
   CONSTRAINT fk_lookup
     FOREIGN KEY (subreddit_id)
