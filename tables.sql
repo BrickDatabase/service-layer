@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS lookup (
   abbreviation VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
 
+CREATE UNIQUE INDEX lookup_abbreviation_uindex
+ON lookup (abbreviation);
+
+
 CREATE TABLE information (
   id SERIAL,
   subreddit_id INT NOT NULL,
