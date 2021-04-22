@@ -22,11 +22,6 @@ except:
     print("apscheduler package not found.")
 
 try:
-    import unittest
-except:
-    print("unittest package not found.")
-
-try:
     import numpy
 except:
     print("Numpy package not found.")
@@ -46,8 +41,6 @@ except:
     exit(1)
 
 subredditArray = baseSQL.returnSelectAllAbbreviation()
-
-unittest.TestCase.assertEquals('foo'.upper(), 'FOO', msg='right message')
 
 subredditID = 1
 print(subredditArray)
