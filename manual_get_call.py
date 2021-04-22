@@ -3,6 +3,7 @@
 # Edward Riley                               #
 ##############################################
 
+
 try:
     import baseAPI
 except:
@@ -19,6 +20,11 @@ try:
     import apscheduler
 except: 
     print("apscheduler package not found.")
+
+try:
+    import pytest
+except:
+    print("pytest package not found.")
 
 try:
     import numpy
@@ -40,6 +46,8 @@ except:
     exit(1)
 
 subredditArray = baseSQL.returnSelectAllAbbreviation()
+
+assert len(subredditArray) != 0,"List is empty."
 
 subredditID = 1
 print(subredditArray)

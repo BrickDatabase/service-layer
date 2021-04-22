@@ -5,6 +5,7 @@
 
 import requests
 import json
+import pytest
 
 # note that CLIENT_ID refers to 'personal use script' and SECRET_TOKEN to 'token'
 auth = requests.auth.HTTPBasicAuth('5H8SluqMBijdSA', 'wZAjkKUXYRMD02YnA7XTcKiie3-OaQ')
@@ -34,22 +35,27 @@ def getResult(urlTarget):
         baseURL = "https://oauth.reddit.com/"
         urlTarget = baseURL + urlTarget
         response = requests.get(urlTarget, headers=headers)
+        assert response.status_code == 200, response.text
 
         # converts to JS
         responseJSON = json.loads(response.content)
 
         return responseJSON
-        
+
 def getSubmissionResult(subreddit):
         baseURL = "https://api.pushshift.io/reddit/search/submission/?subreddit=" + subreddit + "&metadata=true&size=0"
         response = requests.get(baseURL)
-        responseJSON = json.loads(response.content)
         
+        responseJSON = json.loads(response.content)
+        assert response.status_code == 200, response.text
+
         return responseJSON
 
 def getCommentResult(subreddit):
         baseURL = "https://api.pushshift.io/reddit/search/comment/?subreddit=" + subreddit + "&metadata=true&size=0"
         response = requests.get(baseURL)
+        assert response.status_code == 200, response.text
+        
         responseJSON = json.loads(response.content)
         
         return responseJSON
