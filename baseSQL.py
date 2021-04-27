@@ -5,6 +5,7 @@
 
 import os
 import psycopg2
+import time
 
 try:
 
@@ -46,3 +47,15 @@ def deleteSubreddit(id):
     mycursor = databaseVar.cursor()
     mycursor.execute("DELETE from lookup WHERE id = " + str(id) + ";")
     mycursor.execute("DELETE from information WHERE subreddit_id = " + str(id) + ";")
+
+def returnUpdateCount(id):
+    mycursor = databaseVar.cursor()
+    mycursor.execute("SELECT comments, submission, subscribers, active_subscribers from information WHERE subreddit_id = " + id + " ORDER BY date DESC LIMIT 1;")
+    myresult = mycursor.fetchall()
+    return myresult
+
+def insertCalculation(date, comment, submission, subscribers, activeSubscriber):
+    time.sleep(1)
+    mycursor = databaseVar.cursor()
+    mycursor.execute('INSERT INTO day (day, subscriberChange, commentChange, submissionChange, activeSubscriberChange) VALUES ("' + str(date) + '",  "' + str(subscribers) + '",  "' + str(comment) + '",  "' + str(submission) + '",  "' + str(activeSubscriber) + '");')
+    myresult = mycursor.fetchall()

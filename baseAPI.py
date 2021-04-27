@@ -5,7 +5,6 @@
 
 import requests
 import json
-import pytest
 
 # note that CLIENT_ID refers to 'personal use script' and SECRET_TOKEN to 'token'
 auth = requests.auth.HTTPBasicAuth('5H8SluqMBijdSA', 'wZAjkKUXYRMD02YnA7XTcKiie3-OaQ')
