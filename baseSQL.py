@@ -6,15 +6,21 @@
 import os
 import psycopg2
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
+host = os.getenv('DB_HOST')
+database = os.getenv('DB')
+user = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+port = os.getenv('DB_PORT')
+
+# print("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
 
 try:
-
-    # data_url = os.getenv('DATABASE_URL',default='postgres://localhost/postgres')
-    # databaseVar = psycopg2.connect(data_url)
-    databaseVar = psycopg2.connect("dbname=subreddit_db")
+    databaseVar = psycopg2.connect("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
     databaseVar.autocommit = True
     databaseVar.set_session(autocommit=True)
-
 
 except:
     print("Database Connection Failed")
