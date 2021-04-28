@@ -1,12 +1,5 @@
-DROP DATABASE IF EXISTS subreddit_db ;
-
-CREATE DATABASE subreddit_db;
-\c subreddit_db ;
-
-
-DROP TABLE IF EXISTS own;
+DROP TABLE IF EXISTS dayTable;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS day;
 DROP TABLE IF EXISTS information;
 DROP TABLE IF EXISTS lookup;
 
@@ -18,7 +11,6 @@ CREATE TABLE IF NOT EXISTS lookup (
 
 CREATE UNIQUE INDEX lookup_abbreviation_uindex
 ON lookup (abbreviation);
-
 
 CREATE TABLE information (
   id SERIAL,
@@ -36,14 +28,19 @@ CREATE TABLE information (
     ON UPDATE NO ACTION
 );
 
-create table day
+CREATE TABLE schedule
 (
-	id SERIAL
-		CONSTRAINT day_pk
-			PRIMARY KEY
-		CONSTRAINT infold
-			REFERENCES information (id),
-	day int NOT NULL
+	id serial not null
+		constraint day_pk
+			primary key
+		constraint infold
+			references information,
+	"posted" date,
+	"new_subscriber" integer,
+	"new_comment" integer,
+	"new_submission" integer,
+	"new_active_subs" integer,
+  "subreddit_id" integer
 );
 
 create table users
@@ -55,19 +52,6 @@ create table users
 	password varchar(150) NOT NULL,
   role INT
 );
-
-create table own
-(
-    user_id int NOT NULL,
-    subreddit_id int NOT NULL,
-    CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(id),
-    CONSTRAINT subreddit_id FOREIGN KEY (subreddit_id) REFERENCES lookup(id)
-
-);
-
-
-
-
 
 INSERT INTO lookup (name, abbreviation) VALUES ('Rochester Institute of Technology', 'rit');
 INSERT INTO lookup (name, abbreviation) VALUES ('Minecraft', 'minecraft');

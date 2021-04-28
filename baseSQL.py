@@ -60,8 +60,9 @@ def returnUpdateCount(id):
     myresult = mycursor.fetchall()
     return myresult
 
-def insertCalculation(date, comment, submission, subscribers, activeSubscriber):
+def insertCalculation(date, comment, submission, subscribers, activeSubscriber, subreddit_id):
     time.sleep(1)
     mycursor = databaseVar.cursor()
-    mycursor.execute('INSERT INTO day (day, subscriberChange, commentChange, submissionChange, activeSubscriberChange) VALUES ("' + str(date) + '",  "' + str(subscribers) + '",  "' + str(comment) + '",  "' + str(submission) + '",  "' + str(activeSubscriber) + '");')
+    mycursor.execute('INSERT INTO schedule (posted, new_subscriber, new_comment, new_submission, new_active_subs, subreddit_id) VALUES ("' + str(date) + '",  "' + str(subscribers) + '",  "' + str(comment) + '",  "' + str(submission) + '",  "' + str(activeSubscriber) + '",  "' + str(subreddit_id) + '");')
     myresult = mycursor.fetchall()
+    print(myresult)

@@ -52,6 +52,7 @@ for subreddit in subredditArray:
     
     subreddit = numpy.asarray(subreddit)
 
+    subredditID = subreddit[0] 
     # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
     time.sleep(1)
     print(subredditID)
@@ -77,9 +78,8 @@ for subreddit in subredditArray:
         subscriberChange = subscribers - oldSubscriber
         activeSubChange = activeSubscribers - oldActiveSubscriber
 
-        baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange)
+        baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID)
 
     baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
-    subredditID = subredditID + 1
 
 baseSQL.selectAllInformation()
