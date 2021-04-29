@@ -65,8 +65,8 @@ def scheduled_job():
         subreddit = numpy.asarray(subreddit)
 
         subredditID = subreddit[0] 
-        # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
-        time.sleep(1)
+        # API endpoint will crash if you go too fast, after some tests, 2 second is the optimal speed on Heroku. 
+        time.sleep(2)
         print(subredditID)
         
         url = "/r/" + subreddit[2] + "/about/"
