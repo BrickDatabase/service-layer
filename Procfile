@@ -1,1 +1,1 @@
-web: python get_call.py
+worker: python get_call.py
