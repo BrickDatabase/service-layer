@@ -24,7 +24,7 @@ try:
 
     except:
         print("Database Connection Failed")
-        print("Error: " + str(e))
+        print("Error Tracker: " + str(e))
 
         exit(2)
 except Exception as e:
