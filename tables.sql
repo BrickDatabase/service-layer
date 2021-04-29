@@ -30,11 +30,7 @@ CREATE TABLE information (
 
 CREATE TABLE schedule
 (
-	id serial not null
-		constraint day_pk
-			primary key
-		constraint infold
-			references information,
+	id serial not null,
 	"posted" date,
 	"new_subscriber" integer,
 	"new_comment" integer,

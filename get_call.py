@@ -57,17 +57,15 @@ sched = BlockingScheduler()
 # Every 5 minutes
 @sched.scheduled_job('interval', minutes=1)
 def scheduled_job():
-
-
     subredditArray = baseSQL.returnSelectAllAbbreviation()
 
     subredditID = 1
     print(subredditArray)
 
     for subreddit in subredditArray:
-        
         subreddit = numpy.asarray(subreddit)
 
+        subredditID = subreddit[0] 
         # API endpoint will crash if you go too fast, after some tests, 1 second is the optimal speed. 
         time.sleep(1)
         print(subredditID)
@@ -77,32 +75,26 @@ def scheduled_job():
         result = (baseAPI.getResult(url))
         submission = baseAPI.getSubmissionResult(subreddit[2])['metadata']['total_results']
         comment = baseAPI.getCommentResult(subreddit[2])['metadata']['total_results']
-
-        #print(subreddit.capitalize() + " Subscribers:\t" + str(result['data']['subscribers']))
-        #print(subreddit.capitalize() + " Active Users Count:\t" + str(result['data']['active_user_count']))
-        #print(subreddit.capitalize() + " Submission:\t" + str(submission))
-        #print(subreddit.capitalize() + " Comment:\t" + str(comment))
-
         subscribers = result['data']['subscribers']
         activeSubscribers = result['data']['active_user_count']
         date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        res = requests.post('https://brick-subreddit.herokuapp.com/info', 
-        data={'subreddit_id':subredditID,
-        'submission':submission,
-        'comment':comment,
-        'subscribers':subscribers,
-        'activeSubscribers':activeSubscribers,
-        'date':date})
+        oldArray = baseSQL.returnUpdateCount(subreddit[0])
+        for oldArrayVal in oldArray:
+            oldComment          = oldArrayVal[0]
+            oldSubmission       = oldArrayVal[1]
+            oldSubscriber       = oldArrayVal[2]
+            oldActiveSubscriber = oldArrayVal[3]
 
-        print(res)
-        if res.status_code == 200:
-            print('Success!')
-        elif res.status_code == 404:
-            print('Not Found.')
-        # baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
-        subredditID = subredditID + 1
+            commentChange = comment - oldComment
+            submissionChange = submission - oldSubmission
+            subscriberChange = subscribers - oldSubscriber
+            activeSubChange = activeSubscribers - oldActiveSubscriber
 
-    #baseSQL.selectAllInformation()
+            baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID)
+
+        baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
+
+    baseSQL.selectAllInformation()
 
 sched.start()
