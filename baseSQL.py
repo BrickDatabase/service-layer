@@ -13,12 +13,11 @@ try:
     database = os.getenv('DB')
     user = os.getenv('DB_USER')
     password = os.getenv('DB_PASSWORD')
-    port = os.getenv('DB_PORT')
 
     # print("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
 
     try:
-        databaseVar = psycopg2.connect("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
+        databaseVar = psycopg2.connect("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password)
         databaseVar.autocommit = True
         databaseVar.set_session(autocommit=True)
 
