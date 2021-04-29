@@ -2,30 +2,33 @@
 # Author:                                    #
 # Edward Riley                               #
 ##############################################
-
-import os
-import psycopg2 as psycopg2
-import time
-from dotenv import load_dotenv
-
-load_dotenv()
-host = os.getenv('DB_HOST')
-database = os.getenv('DB')
-user = os.getenv('DB_USER')
-password = os.getenv('DB_PASSWORD')
-port = os.getenv('DB_PORT')
-
-# print("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
-
 try:
-    databaseVar = psycopg2.connect("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
-    databaseVar.autocommit = True
-    databaseVar.set_session(autocommit=True)
+    import os
+    import psycopg2 as psycopg2
+    import time
+    from dotenv import load_dotenv
 
-except:
-    print("Database Connection Failed")
-    exit(2)
+    load_dotenv()
+    host = os.getenv('DB_HOST')
+    database = os.getenv('DB')
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASSWORD')
+    port = os.getenv('DB_PORT')
 
+    # print("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
+
+    try:
+        databaseVar = psycopg2.connect("host='" + host + "' dbname='" + database + "' user='" + user + "' password='" + password + "' port='" + port + "'")
+        databaseVar.autocommit = True
+        databaseVar.set_session(autocommit=True)
+
+    except:
+        print("Database Connection Failed")
+        print("Error: " + str(e))
+
+        exit(2)
+except Exception as e:
+    print("Error: " + str(e))
 
 def selectAllInformation():
     mycursor = databaseVar.cursor()
