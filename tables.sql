@@ -62,4 +62,4 @@ INSERT INTO lookup (name, abbreviation) VALUES ('GameStop', 'gamestop');
 INSERT INTO lookup (name, abbreviation) VALUES ('Sony PlayStation', 'playstation');
 INSERT INTO lookup (name, abbreviation) VALUES ('Microsoft Xbox', 'xbox');
 INSERT INTO lookup (name, abbreviation) VALUES ('Nintendo', 'nintendo');
-INSERT INTO lookup (name, abbreviation) VALUES ('Gaming', 'gaming');
+INSERT INTO lookup (name, abbreviation) VALUES ('Twitch', 'twitch');
