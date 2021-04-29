@@ -52,10 +52,8 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 sched = BlockingScheduler()
 
 # Every 11:00 AM 
-# @sched.scheduled_job('cron', hour=11)
 
-# Every 5 minutes
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('cron', hour=11)
 def scheduled_job():
     subredditArray = baseSQL.returnSelectAllAbbreviation()
 
