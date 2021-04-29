@@ -1,1 +1,1 @@
-web: python manual_get_call.py
+web: python get_call.py
