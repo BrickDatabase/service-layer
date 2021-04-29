@@ -92,7 +92,7 @@ def scheduled_job():
             subscriberChange = subscribers - oldSubscriber
             activeSubChange = activeSubscribers - oldActiveSubscriber
 
-            baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID)
+            baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID, comment, submission, subscribers, activeSubscribers)
 
         baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
 

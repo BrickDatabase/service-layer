@@ -28,16 +28,23 @@ CREATE TABLE information (
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE schedule
+create table schedule
 (
 	id serial not null,
-	"posted" date,
-	"new_subscriber" integer,
-	"new_comment" integer,
-	"new_submission" integer,
-	"new_active_subs" integer,
-  "subreddit_id" integer
+	posted date,
+	new_subscriber integer,
+	new_comment integer,
+	new_submission integer,
+	new_active_subs integer,
+	subreddit_id integer,
+	total_subscriber integer,
+	total_comment integer,
+	total_submission integer,
+	total_active_subs integer
 );
+
+alter table schedule owner to xmmgkpiirxvzxb;
+
 
 create table users
 (

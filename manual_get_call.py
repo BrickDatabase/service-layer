@@ -15,11 +15,6 @@ except:
     print("baseSQL.py file not found.")
     exit(1)
 
-# try:
-#     import apscheduler
-# except: 
-#     print("apscheduler package not found.")
-
 try:
     import numpy
 except:
@@ -78,7 +73,7 @@ for subreddit in subredditArray:
         subscriberChange = subscribers - oldSubscriber
         activeSubChange = activeSubscribers - oldActiveSubscriber
 
-        baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID)
+        baseSQL.insertCalculation(date, commentChange, submissionChange, subscriberChange, activeSubChange, subredditID, comment, submission, subscribers, activeSubscribers)
 
     baseSQL.insertRowInformation(subredditID, date, subscribers, activeSubscribers, submission, comment)
 
