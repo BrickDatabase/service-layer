@@ -54,7 +54,9 @@ sched = BlockingScheduler()
 # Every 11:00 AM 
 
 #@sched.scheduled_job('cron', hour=11)
-@sched.scheduled_job('interval', minutes=3)
+
+# Every 15 minutes
+@sched.scheduled_job('interval', minutes=15)
 def scheduled_job():
     subredditArray = baseSQL.returnSelectAllAbbreviation()
 
