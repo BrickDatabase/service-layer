@@ -43,9 +43,6 @@ create table schedule
 	total_active_subs integer
 );
 
-alter table schedule owner to xmmgkpiirxvzxb;
-
-
 create table users
 (
 	id serial
