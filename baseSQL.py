@@ -4,7 +4,7 @@
 ##############################################
 
 import os
-import psycopg2
+import psycopg2 as psycopg2
 import time
 from dotenv import load_dotenv
 
